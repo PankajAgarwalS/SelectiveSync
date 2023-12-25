@@ -19,8 +19,14 @@ def copy_files_by_date(source, destination, start_date, end_date):
                 if not os.path.exists(dest_dir):
                     os.makedirs(dest_dir)
 
-                shutil.copy2(file_path, dest_file_path)
-                print("Copied", file_path, "to", dest_file_path)
+                # Prompt user before copying each file
+                user_response = input(f"Do you want to copy '{file_path}' to '{dest_file_path}'? (yes/no): ").lower()
+
+                if user_response == 'yes':
+                    shutil.copy2(file_path, dest_file_path)
+                    print("Copied", file_path, "to", dest_file_path)
+                else:
+                    print("Skipped copying", file_path)
 
 # Example usage:
 source_dir = input("Enter source directory: ")
